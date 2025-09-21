@@ -7,8 +7,8 @@ public class GBLabProgressionSystem : ModuleRules
 	public GBLabProgressionSystem(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-		
-		PublicIncludePaths.AddRange(
+        IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
+        PublicIncludePaths.AddRange(
 			new string[] {
 				// ... add public include paths required here ...
 			}
