@@ -1,83 +1,80 @@
-Modular Card UI System for Unreal Engine
+# High-Performance 2D Card UI System for Unreal Engine 5
 
-A plugin project demonstrating a fully modular, data-driven, and visually customizable UI system for card-based games, inspired by titles like Vampire Survivors or Slay the Spire.
+A flexible, data-driven system for creating interactive 2D card UIs with advanced, performance-first visual effects. This plugin project serves as a showcase of professional architecture for UMG and material design in Unreal Engine.
 
-This project is currently at Version 0.2. Some features may be incomplete and bugs may be present.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![alt text](https://img.shields.io/badge/License-MIT-yellow.svg)
+---
 
-The core philosophy of this system is the strict separation of data, logic, and visuals. Cards are not hard-coded; they are versatile templates populated with data from Data Assets and styled through a powerful, multi-layered Material system.
-Quick Start Guide
+## Key Features Showcase
 
-This system is designed as a self-contained plugin.
+This system is built for stunning visual effects without sacrificing performance. All effects are driven by a single, powerful, and highly-customizable master material.
 
-    Create a new, empty Unreal Engine project.
+| Dissolve / Burn Effect | Interactive Hover & Shake | Procedural Glow & Layout |
+| :---: | :---: | :---: |
+| ![Image](https://github.com/user-attachments/assets/92e62cdc-db2e-421d-925b-33ab9b8f237f) | ![Image](https://github.com/user-attachments/assets/92e62cdc-db2e-421d-925b-33ab9b8f237f) | ![Image](https://github.com/user-attachments/assets/92e62cdc-db2e-421d-925b-33ab9b8f237f) |
 
-    Create a Plugins folder in the project's root directory.
+**[>> Watch Full Video Showcase on YouTube <<](YOUR_YOUTUBE_LINK_HERE)**
 
-    Clone this repository into the Plugins folder.
+---
 
-    Launch the project. Unreal Engine will prompt to build the plugin; agree and proceed.
+## Core Concepts & Implemented Techniques
 
-    To set up the demo scene:
+*   **🎨 Advanced Material-Driven VFX:**
+    *   **Procedural Dissolve:** A highly customizable "burn" effect with an emissive edge, controlled by a single material parameter.
+    *   **Interactive Shake & Glow:** Responds to player interaction with a material-based shake and a soft procedural glow on hover.
+    *   **ID Mask ("Clown Mask") Layout:** The entire card layout (frame, icon area, title background) is defined by a single color-coded texture, allowing for radical design changes by just editing one image.
+    *   **UV Remapping & Pseudo-Fresnel:** Implements advanced material math to correctly fit textures into masked areas and to generate a border glow compatible with UI and Bloom.
 
-        In the Content Drawer, create a new Widget Blueprint and name it WBP_Deck.
+*   **🚀 High-Performance by Design:**
+    *   **Tick-Free Animations:** All animations (hover, dissolve, etc.) are driven by timers and interpolation (`FInterp To`), not Event Tick, ensuring updates only happen when needed.
+    *   **Optimized Shaders:** The material is built for performance, with complex logic encapsulated in reusable Material Functions for a clean and efficient graph.
 
-        Open it, and in the Graph tab, find the Cards_In_Deck variable.
+*   **⚙️ Data-Driven Architecture:**
+    *   **Data Assets are King:** All card data (title, description, cost, icons) is stored in `PrimaryDataAsset`s. Create and balance new cards without ever touching a Blueprint widget.
+    *   **Widget Factory (`WBP_Deck`):** This central widget acts as a factory, dynamically spawning and populating card widgets from an array of Data Assets. It uses a `Wrap Box` for a responsive, flexible layout.
 
-        Populate this array with the example DA_Card_... assets provided in the plugin's content folder.
+---
 
-        Ensure your Level's GameMode is set to use the BP_HUD class included in the plugin.
+## Installation & Setup
 
-    Open the main level and press Play.
+You have two options to use this system in your own project.
 
-Key Concepts & Implemented Techniques
+### Option 1: Download Release (Recommended)
 
-This system is the result of a step-by-step implementation of professional UI development techniques in Unreal Engine.
-1. Architecture (Data-Driven Design)
+This is the easiest way to get started. You get a clean, ready-to-use plugin without any git history.
 
-    Data Assets (PrimaryDataAsset): All card information (title, description, cost, icons, materials) is stored in individual DA_Card_Base assets. This allows for easy creation and modification of cards without touching any logic or widgets.
+1.  Go to the [**Releases page**](https://github.com/GetBoros/GBLabProgressionSystem/releases).
+2.  Download the `.zip` file from the latest release (e.g., `GBLabProgressionSystem-v1.0.0.zip`).
+3.  In your Unreal Engine project's root folder, create a folder named `Plugins` if it doesn't already exist.
+4.  **Unzip the downloaded file** into the `Plugins` folder. The final path should look like this: `YourProject/Plugins/GBLabProgressionSystem/`.
+5.  Launch your project. Unreal Engine will prompt you to build the plugin; agree and proceed.
 
-    Clear Hierarchy: Follows the standard UE paradigm: GameMode specifies a HUD Class (BP_HUD), which is responsible for creating the main "Deck" widget (WBP_Deck).
+### Option 2: Clone as a Plugin (For Developers)
 
-    Widget Factory (WBP_Deck): The WBP_Deck acts as a factory. It reads an array of Data Assets and dynamically spawns the required number of WBP_Card widgets, feeding them the correct data.
+Use this method if you want to contribute or follow the development history.
 
-    Flexible Layout: Card arrangement is handled by a Wrap Box container, which automatically wraps cards to the next line, ensuring an adaptive layout.
+1.  Navigate to your Unreal Engine project's root folder.
+2.  Create a folder named `Plugins` if it doesn't already exist.
+3.  Open a terminal or command prompt inside the `Plugins` folder and run the following command:
+    ```bash
+    git clone https://github.com/GetBoros/GBLabProgressionSystem.git
+    ```
+4.  Launch your project. Unreal Engine will prompt you to build the plugin; agree and proceed.
 
-2. The Modular Card Widget (WBP_Card)
+### How to Use the Demo
 
-    Professional Hierarchy: Utilizes a robust Size Box -> Overlay -> Content structure. This ensures predictable card dimensions and allows for easy layering of content (background, text, icons).
+After installing the plugin:
+1.  Set your project's `GameMode` to use the `BP_HUD` class provided in the plugin.
+2.  Create a `WBP_Deck` widget in your level (or use the provided Demo Map).
+3.  Populate the `Cards In Deck` array on the `WBP_Deck` instance with the example `DA_Card_...` assets.
+4.  Press Play.
 
-    Dynamic Properties: All key parameters (size, data) are exposed via Expose on Spawn, making the widget highly configurable from the outside.
+---
 
-    Optimized Animations: Smooth hover animations are implemented not via Event Tick, but through a controlled Timer and FInterp To. This provides excellent performance, as updates only occur during the animation itself.
-
-3. Advanced Material System (M_Card_Default)
-
-The core of the visual presentation. The material is fully procedural and multi-layered.
-
-    ID Mask ("Clown Mask"): The entire layout of the card (areas for the frame, title, icon, etc.) is defined by a single color-coded ID Mask texture. This allows for radical design changes by just editing one texture.
-
-    Procedural Mask Generation: Masking out specific ID zones is achieved using the performant Distance -> Step -> OneMinus node combination, which is an industry-standard technique.
-
-    UV Remapping: Implements the math to fit any texture (e.g., an icon) into any rectangular area defined by the ID mask, using the (UV - Start) / Size formula. This allows for non-uniform scaling and positioning of sub-elements within the material itself.
-
-    Procedural Glow (Pseudo-Fresnel): A border glow effect is generated mathematically by analyzing UV coordinates (TexCoord -> Subtract -> Abs -> Max), as the standard Fresnel node is ineffective on flat UI elements.
-
-    Bloom Integration: The glow effect is designed to be "HDR" (color values > 1.0), allowing it to interact with the Post Process Bloom effect for a high-quality emissive look. (Requires enabling the Render Widgets After Post Processing project setting).
-
-4. Refactoring & Reusability (Material Functions)
-
-    Logic Encapsulation: Complex and reusable parts of the material graph (e.g., ID mask generation, UV remapping) are encapsulated into Material Functions (MF_). This results in an exceptionally clean, readable, and easily maintainable main material graph. A key example is the MF_Apply_Texture_By_Mask function, which handles the entire logic of overlaying one texture onto another.
-
-Future Plans & Known Issues
+## Future Plans
 
 This is an ongoing learning project. Future development plans include:
-
-    Implementing drag-and-drop functionality for cards.
-
-    Adding more procedural material effects, such as a "shake" animation for damage and subtle idle movement.
-
-    Refining animations with Curve assets for perfect easing.
-
-    Bug fixing and further performance optimization.
+- **Polishing the 3D Actor System (`BP_Card`):** Integrating the material baking pipeline to create a fully performant 3D version of the cards.
+- **Drag-and-Drop Functionality:** Implementing interactive card dragging.
+- **Refining Animations with Curves:** Using Curve assets for more nuanced animation easing.
