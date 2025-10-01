@@ -12,7 +12,7 @@ This system is built for stunning visual effects without sacrificing performance
 
 | Dissolve / Burn Effect | Interactive Hover & Shake | Procedural Glow & Layout |
 | :---: | :---: | :---: |
-| ![Image](https://github.com/user-attachments/assets/92e62cdc-db2e-421d-925b-33ab9b8f237f) | ![Image](https://github.com/user-attachments/assets/92e62cdc-db2e-421d-925b-33ab9b8f237f) | ![Image](https://github.com/user-attachments/assets/92e62cdc-db2e-421d-925b-33ab9b8f237f) |
+| ![Image](https://github.com/user-attachments/assets/92e62cdc-db2e-421d-925b-33ab9b8f237f) | ![Image](https://github.com/user-attachments/assets/40bc2cc8-439a-430e-b938-e5fd5b2c13c8) | ![Image](https://github.com/user-attachments/assets/92e62cdc-db2e-421d-925b-33ab9b8f237f) |
 
 **[>> Watch Full Video Showcase on YouTube <<](YOUR_YOUTUBE_LINK_HERE)**
 
